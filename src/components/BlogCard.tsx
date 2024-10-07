@@ -23,7 +23,7 @@ export default function BlogCard({ blog, user }: { blog: Blog, user: User }) {
         remarkPlugins={[remarkMath]}
         rehypePlugins={[rehypeKatex]}
       >
-        { blog.content.slice(0, 50) }
+        { blog.content.slice(0, 100) }
       </Markdown>
     </Card>
   );
