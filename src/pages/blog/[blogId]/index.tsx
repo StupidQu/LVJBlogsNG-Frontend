@@ -1,20 +1,23 @@
 import { useNavigate, useParams } from 'react-router';
 import BasicLayout from '../../../components/BasicLayout';
-import { Breadcrumb, Button, message, Space, Typography } from 'antd';
+import { Breadcrumb, Button, Divider, message, Space, Typography } from 'antd';
 import { useRequest } from 'alova/client';
 import request from '../../../lib/request';
-import { Blog, User } from '../../../interface';
-import Markdown from 'react-markdown';
+import { Blog, Comment, User } from '../../../interface';
 import UserCard from '../../../components/UserCard';
 import ts2s from '../../../lib/ts2s';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
+import CommentsList from '../../../components/CommentsList';
+import CommentBox from '../../../components/CommentBox';
+import LatexMarkdown from '../../../components/LatexMarkdown';
 
 type BlogDetail = {
   blog: Blog,
   author: User,
   canEdit: boolean,
   canDelete: boolean,
+  comments: Comment[],
+  usersDict: Record<number, User>,
+  canCommentsDelete: Record<number, { canDelete: boolean }>,
 };
 
 export default function BlogDetail() {
@@ -34,11 +37,8 @@ export default function BlogDetail() {
         <Breadcrumb.Item>{blogId}</Breadcrumb.Item>
       </Breadcrumb>
       <Typography.Title>{ loading ? 'Loading' : data.blog.title}</Typography.Title>
-      {!loading && <p><UserCard user={data.author} /> 发表于 { ts2s(data.blog.createTime) }.</p>}
-      <Markdown 
-        remarkPlugins={[remarkMath]}
-        rehypePlugins={[rehypeKatex]}
-      >{loading ? 'Loading' : data.blog.content }</Markdown>
+      {!loading && <div><UserCard user={data.author} /> 发表于 { ts2s(data.blog.createTime) }.</div>}
+      <LatexMarkdown>{loading ? 'Loading' : data.blog.content }</LatexMarkdown>
       {!loading && (data.canEdit || data.canDelete) && <Space>
         {data.canEdit && <Button onClick={() => navigate(`/blog/${blogId}/edit`)}>编辑</Button>}
         {data.canDelete && <Button danger onClick={() => {
@@ -48,6 +48,9 @@ export default function BlogDetail() {
           })
         }}>删除</Button>}
       </Space>}
+      <Divider orientation='left'>共 {loading ? 0 : data.comments.length} 条评论</Divider>
+      <CommentBox blogId={Number(blogId)} />
+      <CommentsList comments={loading ? [] : data.comments} usersDict={loading ? {} : data.usersDict} canDeleteCommets={loading ? {} : data.canCommentsDelete} />
     </BasicLayout>
   )
 }

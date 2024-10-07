@@ -1,11 +1,8 @@
 import { Breadcrumb, Button, Form, Input, message, Typography } from 'antd';
 import BasicLayout from '../../components/BasicLayout';
-import MarkdownEditor from 'react-markdown-editor-lite';
-import MarkdownIt from 'markdown-it';
-import 'react-markdown-editor-lite/lib/index.css';
-import markdownItKatex from '@traptitech/markdown-it-katex';
 import request from '../../lib/request';
 import { useNavigate } from 'react-router';
+import LatexMarkdownEditor from '../../components/LatexMarkdownEditor';
 
 export default function Post() {
   const currentUser = JSON.parse(window.localStorage.getItem('currentUser') || '{}');
@@ -18,17 +15,6 @@ export default function Post() {
   }
 
   let mdValue = '';
-  
-  const mdIt = new MarkdownIt();
-  mdIt.use(markdownItKatex);
-
-  const markdownEditor = <MarkdownEditor
-    style={{ height: '500px', marginBottom: '16px' }}
-    id="markdownContent"
-    name=""
-    renderHTML={(text) => mdIt.render(text)}
-    onChange={(x) => mdValue = x.text}
-  />;
 
   return (
     <BasicLayout>
@@ -60,7 +46,7 @@ export default function Post() {
         >
           <Input/>
         </Form.Item>
-        {markdownEditor}
+        <LatexMarkdownEditor onChange={(x) => mdValue = x.text} />
         <Form.Item>
           <Button type='primary' htmlType='submit'>提交</Button>
         </Form.Item>

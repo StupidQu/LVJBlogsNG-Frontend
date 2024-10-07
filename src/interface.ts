@@ -14,3 +14,12 @@ export interface Blog {
     createTime: number;
     updateTime: number;
 }
+
+export interface Comment {
+    commentId: number;
+    blogId: number;
+    content: string;
+    author: number;
+    createTime: number;
+    updateTime: number;
+}
