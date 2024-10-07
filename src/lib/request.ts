@@ -11,7 +11,7 @@ const alovaInst = createAlova({
     };
   },
   timeout: 5000,
-  baseURL: 'http://localhost:3030',
+  baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:3030' : 'https://api.xiaoququ.asia/',
   cacheFor: {
     GET: 0,
   },
