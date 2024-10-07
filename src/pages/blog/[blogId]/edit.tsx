@@ -5,15 +5,21 @@ import { useNavigate, useParams } from 'react-router';
 import { useRequest } from 'alova/client';
 import { Blog } from '../../../interface';
 import LatexMarkdownEditor from '../../../components/LatexMarkdownEditor';
+import { useEffect } from 'react';
 
 export default function Post() {
   const currentUser = JSON.parse(window.localStorage.getItem('currentUser') || '{}');
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
 
-  const { data, loading } = useRequest(() => request.Get<{ blog: Blog }>(`/blog/detail/${blogId}`))
+  const { data, loading } = useRequest(() => request.Get<{ blog: Blog }>(`/blog/detail/${blogId}`));
 
   const { blogId } = useParams();
+
+  useEffect(() => {
+    document.title = `编辑博文 - ${loading ? 'Loading' : data.blog.title} - LVJBlogsNG`;
+  });
+
 
   if (!currentUser.uid || currentUser.uid === 1) {
     window.location.href = '/login';

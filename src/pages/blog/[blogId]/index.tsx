@@ -9,6 +9,7 @@ import ts2s from '../../../lib/ts2s';
 import CommentsList from '../../../components/CommentsList';
 import CommentBox from '../../../components/CommentBox';
 import LatexMarkdown from '../../../components/LatexMarkdown';
+import { useEffect } from 'react';
 
 type BlogDetail = {
   blog: Blog,
@@ -25,6 +26,9 @@ export default function BlogDetail() {
   const { data, loading } = useRequest(() => request.Get<BlogDetail>(`/blog/detail/${blogId}`));
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
+  useEffect(() => {
+    document.title = `博客详情 - ${loading ? 'Loading' : data.blog.title} - LVJBlogsNG`;
+  });
 
   if (!blogId) return <div>404</div>;
 

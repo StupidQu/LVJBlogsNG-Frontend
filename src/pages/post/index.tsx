@@ -3,11 +3,16 @@ import BasicLayout from '../../components/BasicLayout';
 import request from '../../lib/request';
 import { useNavigate } from 'react-router';
 import LatexMarkdownEditor from '../../components/LatexMarkdownEditor';
+import { useEffect } from 'react';
 
 export default function Post() {
   const currentUser = JSON.parse(window.localStorage.getItem('currentUser') || '{}');
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
+
+  useEffect(() => {
+    document.title = '发表博文 - LVJBlogsNG';
+  });
 
   if (!currentUser.uid || currentUser.uid === 1) {
     window.location.href = '/login';

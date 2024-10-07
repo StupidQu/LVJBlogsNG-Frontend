@@ -2,10 +2,15 @@ import { Breadcrumb, Button, Form, Input, message, Typography } from 'antd';
 import BasicLayout from '../../components/BasicLayout';
 import request from '../../lib/request';
 import { useNavigate } from 'react-router';
+import { useEffect } from 'react';
 
 export default function Register() {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
+
+  useEffect(() => {
+    document.title = '注册 - LVJBlogsNG';
+  });
 
   return (<BasicLayout>
     <Breadcrumb style={{ margin: '16px 0' }}>
