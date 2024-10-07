@@ -3,7 +3,6 @@ import { Blog, User } from '../interface';
 import { useNavigate } from 'react-router';
 import './BlogCard.css';
 import UserCard from './UserCard';
-import 'katex/dist/katex.min.css';
 import LatexMarkdown from './LatexMarkdown';
 
 export default function BlogCard({ blog, user }: { blog: Blog, user: User }) {
