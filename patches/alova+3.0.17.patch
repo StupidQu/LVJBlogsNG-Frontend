@@ -1,0 +1,10 @@
+diff --git a/node_modules/alova/typings/fetch.d.ts b/node_modules/alova/typings/fetch.d.ts
+index 4c9d095..5148bae 100644
+--- a/node_modules/alova/typings/fetch.d.ts
++++ b/node_modules/alova/typings/fetch.d.ts
+@@ -8,4 +8,4 @@ export type FetchRequestInit = Omit<RequestInit, 'body' | 'headers' | 'method'>;
+ export type FetchRequestAdapter = AlovaRequestAdapter<FetchRequestInit, Response, Headers>;
+ 
+ declare function adapterFetch(): FetchRequestAdapter;
+-export = adapterFetch;
++export default adapterFetch;
