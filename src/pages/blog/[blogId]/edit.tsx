@@ -37,7 +37,7 @@ export default function Post() {
         <Breadcrumb.Item>Edit</Breadcrumb.Item>
       </Breadcrumb>
       {contextHolder}
-      <Typography.Title>编辑博文</Typography.Title>
+      <Typography.Title>编辑博文{loading ? '' : `：${data.blog.title}`}</Typography.Title>
       <Form
         layout='vertical'
         onFinish={(values) => {
