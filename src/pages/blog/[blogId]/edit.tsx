@@ -60,7 +60,7 @@ export default function Post() {
         >
           {!loading && <Input defaultValue={data.blog.title}/>}
         </Form.Item>
-        <LatexMarkdownEditor onChange={(x) => mdValue = x.text} value={loading ? '' : data.blog.content} />
+        {!loading && <LatexMarkdownEditor onChange={(x) => mdValue = x.text} value={data.blog.content} />}
         <Form.Item>
           <Button type='primary' htmlType='submit'>提交</Button>
           <Button style={{ marginLeft: '8px' }} onClick={() => navigate(`/blog/${blogId}`)}>取消</Button>
