@@ -13,6 +13,6 @@ export default function LatexMarkdownEditor({ onChange, height='500px', value=''
     name=""
     renderHTML={(text) => mdIt.render(text)}
     onChange={onChange}
-    value={value}
+    defaultValue={value}
   />);
 }
