@@ -13,6 +13,7 @@ export interface Blog {
     author: number;
     createTime: number;
     updateTime: number;
+    password?: string;
 }
 
 export interface Comment {

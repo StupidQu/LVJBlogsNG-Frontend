@@ -4,7 +4,7 @@ import { Content, Footer } from 'antd/es/layout/layout';
 
 export default function BasicLayout({ children }: { children: React.ReactNode }) {
   return (
-  <Layout>
+  <Layout lang="zh">
     <Nav />
     <Content style={{
       padding: '0 10%',

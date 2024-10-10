@@ -34,6 +34,7 @@ export default function Post() {
         onFinish={(values) => {
           request.Post<{success: boolean, msg?: string, blogId?: number}>('/blog/create', {
             title: values.title,
+            password: values.password,
             content: mdValue,
           }).then((data) => {
             if (data.success) {
@@ -52,6 +53,13 @@ export default function Post() {
           <Input/>
         </Form.Item>
         <LatexMarkdownEditor onChange={(x) => mdValue = x.text} />
+        <Form.Item
+          label="密码"
+          name="password"
+          rules={[{ required: false }]}
+        >
+          <Input placeholder='公开文章请留空'/>
+        </Form.Item>
         <Form.Item>
           <Button type='primary' htmlType='submit'>提交</Button>
         </Form.Item>
