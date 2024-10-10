@@ -41,8 +41,9 @@ export default function Post() {
       <Form
         layout='vertical'
         onFinish={(values) => {
-          request.Post<{success: boolean, msg?: string, blogId?: number}>('/blog/create', {
+          request.Post<{success: boolean, msg?: string, blogId?: number}>(`/blog/edit/${blogId}`, {
             title: values.title,
+            password: values.password,
             content: mdValue,
           }).then((data) => {
             if (data.success) {
@@ -61,6 +62,13 @@ export default function Post() {
           {!loading && <Input defaultValue={data.blog.title}/>}
         </Form.Item>
         {!loading && <LatexMarkdownEditor onChange={(x) => mdValue = x.text} value={data.blog.content} />}
+        <Form.Item
+          label="密码"
+          name="password"
+          rules={[{ required: false }]}
+        >
+          <Input placeholder='公开文章请留空'/>
+        </Form.Item>
         <Form.Item>
           <Button type='primary' htmlType='submit'>提交</Button>
           <Button style={{ marginLeft: '8px' }} onClick={() => navigate(`/blog/${blogId}`)}>取消</Button>
