@@ -77,7 +77,7 @@ export default function BlogDetail() {
         <Breadcrumb.Item>Blog</Breadcrumb.Item>
         <Breadcrumb.Item>{blogId}</Breadcrumb.Item>
       </Breadcrumb>
-      <Typography.Title>{ loading ? 'Loading' : data.blog.title}{ !loading && data.blog.password && data.blog.password !== '' && <Typography.Text type="warning">(被密码保护的博文)</Typography.Text>}</Typography.Title>
+      <Typography.Title>{ loading ? 'Loading' : data.blog.title}{ !loading && data.blog.protected && <Typography.Text type="warning">(被密码保护的博文)</Typography.Text>}</Typography.Title>
       {!loading && <div><UserCard user={data.author} /> 发表于 { ts2s(data.blog.createTime) }.</div>}
       <LatexMarkdown>{loading ? 'Loading' : data.blog.content }</LatexMarkdown>
       {!loading && (data.canEdit || data.canDelete) && <Space>

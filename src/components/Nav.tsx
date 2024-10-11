@@ -20,8 +20,10 @@ export default function Nav() {
     return request.Get<NavData>('/ui/nav');
   });
   const navigate = useNavigate();
+  
   let nowLocation = 'home';
   if (window.location.pathname.startsWith('/post')) nowLocation = 'post';
+  if (window.location.pathname.startsWith('/user')) nowLocation = 'user';
 
   let userNavItem = <div style={{ float: 'right' }}>
     <Space><Button onClick={() => navigate('/login')}>登录</Button>
@@ -35,8 +37,8 @@ export default function Nav() {
         window.location.reload();
       }}>登出</Button>
     </Space>
-    window.localStorage.setItem('currentUser', JSON.stringify(data.currentUser));
   }
+  if (!loading) window.localStorage.setItem('currentUser', JSON.stringify(data.currentUser));
 
   return (
     <Header style={{ padding: '0 10%'}}>
@@ -56,6 +58,7 @@ export default function Nav() {
           onClick={(e) => {
             if (e.key === 'home') navigate('/');
             if (e.key === 'post') navigate('/post');
+            if (e.key === 'user') navigate(`/user/${loading ? 1 : data.currentUser.uid}`);
           }}
         />
         {userNavItem}

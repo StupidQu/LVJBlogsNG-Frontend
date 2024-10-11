@@ -14,6 +14,8 @@ export interface Blog {
     createTime: number;
     updateTime: number;
     password?: string;
+    commentsCount?: number;
+    protected?: boolean;
 }
 
 export interface Comment {

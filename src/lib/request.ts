@@ -21,4 +21,6 @@ const alovaInst = createAlova({
   statesHook: reactHook,
 });
 
-export default alovaInst;
+const request = alovaInst;
+
+export default request;
